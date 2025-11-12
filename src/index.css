@@ -1,0 +1,594 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ========================================
+   🏥 RESET & BASE STYLES CLÍNICO
+   ======================================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+:root {
+  /* Colores médicos profesionales */
+  --color-medical-primary: #0089b3;
+  --color-medical-dark: #005a7a;
+  --color-medical-light: #e8f4f8;
+  --color-clinical-white: #fafbfc;
+  --color-clinical-dark: #2c3e50;
+  --color-success: #00b894;
+
+  /* Transitions profesionales */
+  --transition-base: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-smooth: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+@media (max-width: 1024px) {
+  html {
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 768px) {
+  html {
+    font-size: 14px;
+  }
+}
+
+body {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui,
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  background-color: var(--color-clinical-white);
+  color: #1a2332;
+  line-height: 1.7;
+  letter-spacing: -0.01em;
+}
+
+/* ========================================
+   🖱️ SCROLLBAR CLÍNICO PROFESIONAL
+   ======================================== */
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f5f7f9;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #0089b3 0%, #005a7a 100%);
+  border-radius: 10px;
+  border: 2px solid #f5f7f9;
+  transition: var(--transition-base);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #005a7a 0%, #0089b3 100%);
+  border-width: 1px;
+}
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #0089b3 #f5f7f9;
+}
+
+/* ========================================
+   ✨ SELECTION STYLES PROFESIONAL
+   ======================================== */
+::selection {
+  background-color: rgba(0, 137, 179, 0.2);
+  color: #1a4d6d;
+  text-shadow: none;
+}
+
+::-moz-selection {
+  background-color: rgba(0, 137, 179, 0.2);
+  color: #1a4d6d;
+  text-shadow: none;
+}
+
+/* ========================================
+   📝 TYPOGRAPHY MÉDICA PROFESIONAL
+   ======================================== */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: #2c3e50;
+  margin: 0;
+}
+
+p {
+  line-height: 1.7;
+  color: #4a5660;
+  margin: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: var(--transition-base);
+}
+
+a:hover {
+  color: #0089b3;
+}
+
+/* ========================================
+   🎬 ANIMACIONES CLÍNICAS
+   ======================================== */
+@keyframes pulse-medical {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.92;
+    transform: scale(1.04);
+  }
+}
+
+@keyframes float-medical {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  33% {
+    transform: translateY(-15px) rotate(1deg);
+  }
+  66% {
+    transform: translateY(-8px) rotate(-1deg);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -1200px 0;
+  }
+  100% {
+    background-position: 1200px 0;
+  }
+}
+
+@keyframes medical-glow {
+  0%,
+  100% {
+    box-shadow: 0 0 15px rgba(0, 137, 179, 0.2);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(0, 137, 179, 0.4);
+  }
+}
+
+/* ========================================
+   💎 GLASSMORPHISM CLÍNICO
+   ======================================== */
+.glass-effect {
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.glass-clinic {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: saturate(180%) blur(20px);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  border: 1px solid rgba(0, 137, 179, 0.15);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+}
+
+/* ========================================
+   🌈 GRADIENT TEXT MÉDICO
+   ======================================== */
+.gradient-text {
+  background: linear-gradient(135deg, #0089b3 0%, #00b894 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 800;
+}
+
+.gradient-text-medical {
+  background: linear-gradient(135deg, #0089b3 0%, #005a7a 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 800;
+}
+
+/* ========================================
+   🔘 BUTTON STYLES CLÍNICO
+   ======================================== */
+.btn-medical {
+  @apply bg-gradient-to-r from-primary-500 to-primary-700;
+  @apply text-white font-bold py-4 px-10 rounded-full;
+  @apply shadow-medical hover:shadow-medical-lg;
+  @apply transform hover:scale-105 hover:-translate-y-1;
+  @apply transition-all duration-300;
+}
+
+.btn-primary-clinic {
+  position: relative;
+  @apply bg-gradient-to-r from-primary-500 to-medical-dark;
+  @apply text-white font-bold py-4 px-10 rounded-full;
+  @apply shadow-medical hover:shadow-medical-xl;
+  @apply transform hover:scale-105 transition-all duration-300 hover:-translate-y-2;
+  overflow: hidden;
+}
+
+.btn-secondary-clinic {
+  @apply bg-white text-clinical-dark font-bold py-4 px-10 rounded-full;
+  @apply border-2 border-clinical-steel hover:border-primary-500 hover:text-primary-500;
+  @apply shadow-soft hover:shadow-card transition-all duration-300;
+}
+
+.btn-success {
+  @apply bg-gradient-to-r from-health-emerald to-health-forest;
+  @apply text-white font-bold py-4 px-10 rounded-full;
+  @apply shadow-medical hover:shadow-medical-lg;
+  @apply transform hover:scale-105 hover:-translate-y-1;
+  @apply transition-all duration-300;
+}
+
+/* ========================================
+   🎴 CARD STYLES CLÍNICO
+   ======================================== */
+.clinic-card {
+  @apply bg-white rounded-3xl p-8;
+  @apply shadow-card hover:shadow-card-hover;
+  @apply transition-all duration-500 border border-clinical-silver;
+  @apply transform hover:-translate-y-3;
+}
+
+.card-hover {
+  @apply transform transition-all duration-500;
+  @apply hover:-translate-y-4 hover:shadow-2xl;
+}
+
+.procedure-card {
+  @apply bg-white rounded-3xl overflow-hidden;
+  @apply shadow-card hover:shadow-card-hover;
+  @apply transition-all duration-500 cursor-pointer;
+  @apply border border-clinical-silver;
+}
+
+.procedure-card:hover {
+  @apply -translate-y-3 border-primary-500/40;
+  box-shadow: 0 20px 60px rgba(0, 137, 179, 0.2);
+}
+
+.testimonial-clinical {
+  @apply bg-white rounded-2xl p-8 shadow-card border border-clinical-silver relative;
+  @apply hover:shadow-card-hover transition-all duration-300;
+}
+
+.testimonial-clinical::before {
+  content: '"';
+  @apply absolute top-4 left-4 text-6xl text-primary-500/15;
+  font-family: Georgia, serif;
+  line-height: 1;
+}
+
+/* ========================================
+   📐 LAYOUT & SPACING CLÍNICO
+   ======================================== */
+.section-spacing {
+  @apply py-24 md:py-32 lg:py-40;
+}
+
+.container-clinical {
+  @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+}
+
+.section-header {
+  @apply text-center mb-16 md:mb-20 lg:mb-24;
+}
+
+.content-block {
+  @apply bg-clinical-snow rounded-3xl p-8 md:p-12 lg:p-16 border border-clinical-silver;
+  @apply shadow-soft;
+}
+
+/* ========================================
+   📱 RESPONSIVE GRIDS
+   ======================================== */
+.grid-clinical-2 {
+  @apply grid md:grid-cols-2 gap-8 md:gap-12 lg:gap-16 items-center;
+}
+
+.grid-clinical-3 {
+  @apply grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 lg:gap-10;
+}
+
+.clinical-grid {
+  @apply grid gap-8;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+/* ========================================
+   ✍️ TYPOGRAPHY UTILITIES
+   ======================================== */
+.heading-display {
+  @apply text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold tracking-tight;
+  @apply leading-[1.1];
+  color: #2c3e50;
+}
+
+.heading-xl {
+  @apply text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight;
+  @apply leading-tight;
+  color: #2c3e50;
+}
+
+.heading-lg {
+  @apply text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight;
+  color: #2c3e50;
+}
+
+.heading-md {
+  @apply text-2xl md:text-3xl lg:text-4xl font-semibold;
+  color: #2c3e50;
+}
+
+.body-lg {
+  @apply text-lg md:text-xl lg:text-2xl leading-relaxed;
+  color: #4a5660;
+}
+
+.section-subtitle {
+  @apply text-primary-500 font-bold text-sm md:text-base uppercase tracking-wider mb-3;
+  @apply flex items-center justify-center gap-2;
+}
+
+/* ========================================
+   🎯 DECORATIVE ELEMENTS
+   ======================================== */
+.decorative-line {
+  @apply relative pb-6;
+}
+
+.decorative-line::after {
+  content: "";
+  @apply absolute bottom-0 left-1/2 -translate-x-1/2;
+  @apply w-20 h-1 rounded-full;
+  background: linear-gradient(90deg, transparent, #0089b3, transparent);
+  box-shadow: 0 4px 12px rgba(0, 137, 179, 0.3);
+}
+
+.divider-clinical {
+  @apply w-full h-px my-12;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(0, 0, 0, 0.08),
+    transparent
+  );
+}
+
+.divider-medical {
+  @apply w-24 h-1 rounded-full mx-auto my-8;
+  background: linear-gradient(90deg, #0089b3, #00b894, #0089b3);
+  box-shadow: 0 4px 12px rgba(0, 137, 179, 0.25);
+}
+
+/* ========================================
+   🏅 BADGE & TRUST ELEMENTS
+   ======================================== */
+.trust-badge {
+  @apply inline-flex items-center px-5 py-2.5;
+  @apply bg-medical-light rounded-full;
+  @apply text-sm font-bold text-primary-700;
+  @apply border border-primary-500/25;
+  @apply shadow-soft;
+}
+
+.badge-medical {
+  @apply inline-flex items-center px-4 py-1.5;
+  @apply bg-primary-500/10 text-primary-700;
+  @apply text-xs font-bold rounded-full uppercase tracking-wider;
+  @apply border border-primary-500/30;
+}
+
+/* ========================================
+   🎥 MEDIA ELEMENTS
+   ======================================== */
+.img-clinical-container {
+  @apply relative overflow-hidden rounded-3xl shadow-card;
+}
+
+.img-clinical-container::after {
+  content: "";
+  @apply absolute inset-0 bg-gradient-to-t from-black/25 to-transparent;
+  @apply opacity-0 transition-opacity duration-300;
+}
+
+.img-clinical-container:hover::after {
+  @apply opacity-100;
+}
+
+.img-hover-zoom {
+  @apply overflow-hidden rounded-3xl;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+}
+
+.img-hover-zoom img {
+  @apply transition-transform duration-700;
+}
+
+.img-hover-zoom:hover img {
+  @apply scale-110;
+}
+
+.video-clinical {
+  @apply relative rounded-3xl overflow-hidden shadow-card;
+  @apply aspect-video bg-clinical-alabaster;
+}
+
+/* ========================================
+   📊 STATS & COUNTERS
+   ======================================== */
+.stat-display {
+  @apply text-center p-6 rounded-2xl bg-white;
+  @apply shadow-soft hover:shadow-card;
+  @apply transition-all duration-300;
+  @apply border border-clinical-silver;
+}
+
+.counter-number {
+  font-variant-numeric: tabular-nums;
+  @apply font-bold;
+}
+
+/* ========================================
+   🎨 INFO PANELS
+   ======================================== */
+.info-panel {
+  @apply bg-gradient-to-br from-medical-light to-medical-sky;
+  @apply rounded-3xl p-8 border border-primary-500/15;
+  @apply shadow-soft;
+}
+
+.feature-icon {
+  @apply w-20 h-20 flex items-center justify-center;
+  @apply rounded-2xl bg-primary-500/10;
+  @apply text-primary-500 mb-4;
+  @apply transition-transform duration-300;
+}
+
+.feature-icon:hover {
+  @apply scale-110;
+}
+
+/* ========================================
+   🌊 HERO & PARALLAX
+   ======================================== */
+.parallax {
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.hero-overlay {
+  @apply relative;
+}
+
+.hero-overlay::before {
+  content: "";
+  @apply absolute inset-0 z-10;
+  background: linear-gradient(
+    135deg,
+    rgba(44, 62, 80, 0.88) 0%,
+    rgba(0, 137, 179, 0.7) 100%
+  );
+}
+
+
+.hero-overlay > * {
+  @apply relative z-10;
+}
+
+/* ========================================
+   🎭 NAVIGATION
+   ======================================== */
+.nav-blur {
+  backdrop-filter: saturate(180%) blur(20px);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  background-color: rgba(255, 255, 255, 0.92);
+  @apply border-b border-clinical-silver;
+}
+
+/* ========================================
+   ⚡ INTERACTIVE ELEMENTS
+   ======================================== */
+.interactive-hover {
+  @apply transition-all duration-300 hover:-translate-y-2;
+}
+
+.smooth-transition {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ========================================
+   🎪 UTILITY CLASSES
+   ======================================== */
+.scroll-section {
+  @apply min-h-screen flex items-center justify-center;
+}
+
+.text-shadow-soft {
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+}
+
+/* ========================================
+   📱 MOBILE OPTIMIZATIONS
+   ======================================== */
+@media (max-width: 768px) {
+  .heading-display {
+    @apply text-4xl;
+  }
+
+  .heading-xl {
+    @apply text-3xl;
+  }
+
+  .section-spacing {
+    @apply py-16;
+  }
+
+  .clinic-card {
+    @apply p-6;
+  }
+
+  .content-block {
+    @apply p-6;
+  }
+}
+
+/* ========================================
+   ♿ ACCESSIBILITY
+   ======================================== */
+.focus-visible:focus {
+  @apply outline-none ring-2 ring-primary-500 ring-offset-2;
+}
+
+button:focus-visible,
+a:focus-visible {
+  @apply outline-none ring-2 ring-primary-500 ring-offset-2;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
