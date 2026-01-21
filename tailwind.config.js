@@ -93,6 +93,10 @@ export default {
         
         // Gradientes de éxito
         'gradient-success': 'linear-gradient(135deg, #00B894 0%, #00856A 100%)',
+        
+        // Gradientes premium (NUEVOS)
+        'gradient-premium': 'linear-gradient(135deg, #006D8F 0%, #0089B3 50%, #00A8CC 100%)',
+        'gradient-shine': 'linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent)',
       },
 
       boxShadow: {
@@ -115,6 +119,11 @@ export default {
         
         // Sombras premium
         'premium': '0 20px 60px -12px rgba(0, 137, 179, 0.20)',
+        
+        // Sombras de glow (NUEVAS)
+        'glow-sm': '0 0 10px rgba(0, 137, 179, 0.3)',
+        'glow': '0 0 20px rgba(0, 137, 179, 0.4)',
+        'glow-lg': '0 0 30px rgba(0, 137, 179, 0.5)',
       },
 
       animation: {
@@ -128,62 +137,20 @@ export default {
         'scale-in': 'scaleIn 0.4s ease-out',
         'scale-up': 'scaleUp 0.5s ease-out',
         'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+        'pulse-medical': 'pulse-medical 2s ease-in-out infinite',
         'float': 'float 6s ease-in-out infinite',
         'float-slow': 'float 8s ease-in-out infinite',
         'spin-slow': 'spin 3s linear infinite',
         'shimmer': 'shimmer 2.5s infinite',
-      },
-
-      keyframes: {
-        fadeIn: {
-          '0%': { opacity: '0' },
-          '100%': { opacity: '1' },
-        },
-        fadeInUp: {
-          '0%': { opacity: '0', transform: 'translateY(30px)' },
-          '100%': { opacity: '1', transform: 'translateY(0)' },
-        },
-        fadeInDown: {
-          '0%': { opacity: '0', transform: 'translateY(-30px)' },
-          '100%': { opacity: '1', transform: 'translateY(0)' },
-        },
-        slideUp: {
-          '0%': { transform: 'translateY(30px)', opacity: '0' },
-          '100%': { transform: 'translateY(0)', opacity: '1' },
-        },
-        slideDown: {
-          '0%': { transform: 'translateY(-30px)', opacity: '0' },
-          '100%': { transform: 'translateY(0)', opacity: '1' },
-        },
-        slideLeft: {
-          '0%': { transform: 'translateX(30px)', opacity: '0' },
-          '100%': { transform: 'translateX(0)', opacity: '1' },
-        },
-        slideRight: {
-          '0%': { transform: 'translateX(-30px)', opacity: '0' },
-          '100%': { transform: 'translateX(0)', opacity: '1' },
-        },
-        scaleIn: {
-          '0%': { transform: 'scale(0.9)', opacity: '0' },
-          '100%': { transform: 'scale(1)', opacity: '1' },
-        },
-        scaleUp: {
-          '0%': { transform: 'scale(1)' },
-          '50%': { transform: 'scale(1.05)' },
-          '100%': { transform: 'scale(1)' },
-        },
-        float: {
-          '0%, 100%': { transform: 'translateY(0px)' },
-          '50%': { transform: 'translateY(-20px)' },
-        },
-        shimmer: {
-          '0%': { backgroundPosition: '-1000px 0' },
-          '100%': { backgroundPosition: '1000px 0' },
-        },
+        'glow-pulse': 'glow-pulse 2s ease-in-out infinite',
       },
 
       // Espaciado personalizado
       spacing: {
+        '18': '4.5rem',
+        '88': '22rem',
+        '100': '25rem',
+        '112': '28rem',
         '128': '32rem',
         '144': '36rem',
       },
@@ -192,12 +159,14 @@ export default {
       borderRadius: {
         '4xl': '2rem',
         '5xl': '2.5rem',
+        '6xl': '3rem',
       },
 
       // Blur personalizado
       blur: {
         'xs': '2px',
         '4xl': '72px',
+        '5xl': '96px',
       },
 
       // Z-index personalizado
@@ -207,6 +176,31 @@ export default {
         '80': '80',
         '90': '90',
         '100': '100',
+      },
+
+      // Backdrop blur (NUEVO)
+      backdropBlur: {
+        xs: '2px',
+        '4xl': '72px',
+      },
+
+      // Tamaños máximos adicionales (NUEVO)
+      maxWidth: {
+        '8xl': '88rem',
+        '9xl': '96rem',
+      },
+
+      // Transitions personalizadas (NUEVO)
+      transitionTimingFunction: {
+        'bounce-in': 'cubic-bezier(0.68, -0.55, 0.265, 1.55)',
+        'smooth': 'cubic-bezier(0.4, 0, 0.2, 1)',
+      },
+
+      // Duraciones personalizadas (NUEVO)
+      transitionDuration: {
+        '400': '400ms',
+        '600': '600ms',
+        '800': '800ms',
       },
     },
   },
