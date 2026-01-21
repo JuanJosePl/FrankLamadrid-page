@@ -4,7 +4,7 @@ import Navbar from '../components/layout/Navbar'
 import Footer from '../components/layout/Footer'
 
 // Pages
-import Home from '../pages/Home/Home'
+import Home from '../pages/home/Home'
 
 function App() {
   return (
