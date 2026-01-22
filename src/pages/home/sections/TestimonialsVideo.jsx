@@ -92,7 +92,7 @@ const TestimonialsVideo = () => {
           </p>
         </motion.div>
 
-        {/* Video Grid con cards premium */}
+        {/* Video Grid con cards premium - THUMBNAIL COMPLETO SIN RECORTE */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10 mb-20">
           {testimonials.map((testimonial, index) => (
             <motion.div
@@ -104,20 +104,20 @@ const TestimonialsVideo = () => {
               className="group"
             >
               <div className="relative bg-white rounded-[2rem] overflow-hidden shadow-xl shadow-black/5 border border-clinical-silver/30 hover:shadow-2xl hover:shadow-primary-500/10 transition-all duration-500 hover:-translate-y-3">
-                {/* Thumbnail con overlay gradiente */}
+                {/* Thumbnail CON ASPECT RATIO 4:5 PARA MOSTRAR MÁS CONTENIDO */}
                 <div 
                   onClick={() => setSelectedVideo(testimonial)}
-                  className="relative aspect-video overflow-hidden cursor-pointer"
+                  className="relative aspect-[4/5] overflow-hidden cursor-pointer"
                 >
                   <img
                     src={testimonial.thumbnail}
                     alt={`Testimonio ${testimonial.id}`}
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                    className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
                   />
                   
-                  {/* Multi-layer overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-medical-navy/90 via-medical-navy/40 to-transparent" />
-                  <div className="absolute inset-0 bg-primary-500/0 group-hover:bg-primary-500/10 transition-colors duration-500" />
+                  {/* Multi-layer overlay - MÁS SUTIL PARA VER MEJOR LA FOTO */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-medical-navy/80 via-medical-navy/20 to-transparent" />
+                  <div className="absolute inset-0 bg-primary-500/0 group-hover:bg-primary-500/5 transition-colors duration-500" />
                   
                   {/* Play button con efectos premium */}
                   <motion.div
@@ -137,7 +137,7 @@ const TestimonialsVideo = () => {
                     </div>
                   </motion.div>
 
-                  {/* Badge con glassmorphism */}
+                  {/* Badge con glassmorphism - REPOSICIONADO */}
                   <div className="absolute top-4 right-4 z-10">
                     <div className="bg-white/95 backdrop-blur-sm px-4 py-2 rounded-full border border-health-emerald/30 shadow-lg">
                       <span className="text-xs font-bold text-health-emerald uppercase tracking-wider">

@@ -1,52 +1,77 @@
-import { useState } from 'react'
-import { Award, Users, Star, Play, CheckCircle, X } from 'lucide-react'
-import { motion, AnimatePresence } from 'framer-motion'
-import { useLanguage } from '../../../contexts/LanguageContext'
+import { useState } from "react";
+import { Award, Users, Star, Play, CheckCircle, X } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { useLanguage } from "../../../contexts/LanguageContext";
 
 const AboutPreview = () => {
-  const { t } = useLanguage()
-  const [isVideoOpen, setIsVideoOpen] = useState(false)
+  const { t } = useLanguage();
+  const [isVideoOpen, setIsVideoOpen] = useState(false);
 
   const stats = [
-    { value: '18K+', label: { es: 'Cirugías', en: 'Surgeries' }, icon: <CheckCircle /> },
-    { value: '50+', label: { es: 'Países', en: 'Countries' }, icon: <Users /> },
-    { value: '99.8%', label: { es: 'Satisfacción', en: 'Satisfaction' }, icon: <Star /> },
-  ]
+    {
+      value: "18K+",
+      label: { es: "Cirugías", en: "Surgeries" },
+      icon: <CheckCircle />,
+    },
+    { value: "50+", label: { es: "Países", en: "Countries" }, icon: <Users /> },
+    {
+      value: "99.8%",
+      label: { es: "Satisfacción", en: "Satisfaction" },
+      icon: <Star />,
+    },
+  ];
 
   const achievements = [
     {
       icon: <Award />,
-      title: { es: 'Certificación ACCC', en: 'ACCC Certification' },
-      description: { es: 'Asociación Colombiana de Cirugía Cosmética', en: 'Colombian Association of Cosmetic Surgery' },
+      title: { es: "Certificación ACCC", en: "ACCC Certification" },
+      description: {
+        es: "Asociación Colombiana de Cirugía Cosmética",
+        en: "Colombian Association of Cosmetic Surgery",
+      },
     },
     {
       icon: <Users />,
-      title: { es: '50+ Países', en: '50+ Countries' },
-      description: { es: 'Pacientes internacionales satisfechos', en: 'Satisfied international patients' },
+      title: { es: "50+ Países", en: "50+ Countries" },
+      description: {
+        es: "Pacientes internacionales satisfechos",
+        en: "Satisfied international patients",
+      },
     },
     {
       icon: <Star />,
-      title: { es: 'Técnica Lipo 4K', en: '4K Lipo Technique' },
-      description: { es: 'Pionero y creador de la técnica patentada', en: 'Pioneer and creator of patented technique' },
+      title: { es: "Técnica Lipo 4K", en: "4K Lipo Technique" },
+      description: {
+        es: "Pionero y creador de la técnica patentada",
+        en: "Pioneer and creator of patented technique",
+      },
     },
-  ]
+  ];
 
-  const videoUrl = 'https://res.cloudinary.com/disqdfjy9/video/upload/v1769050268/Lipoescultura_4K_t%C3%A9cnica_Dr_Frank_Lamadrid_t0nnzw.mp4'
+  // VIDEO URL Y THUMBNAIL
+  const videoUrl =
+    "https://res.cloudinary.com/disqdfjy9/video/upload/v1769050268/Lipoescultura_4K_t%C3%A9cnica_Dr_Frank_Lamadrid_t0nnzw.mp4";
+  const videoThumbnail =
+    "https://res.cloudinary.com/disqdfjy9/image/upload/v1762930755/LAMADRID_twnk4k.png";
 
   return (
-    <section id="sobre-mi" className="relative min-h-screen flex items-center py-24 md:py-32 lg:py-40 overflow-hidden">
+    <section
+      id="sobre-mi"
+      className="relative min-h-screen flex items-center py-24 md:py-32 lg:py-40 overflow-hidden"
+    >
       {/* Background premium similar al Hero */}
       <div className="absolute inset-0 bg-gradient-to-b from-white via-clinical-snow/50 to-white" />
-      
       {/* Pattern decorativo sutil */}
-      <div className="absolute inset-0 opacity-[0.015]" style={{
-        backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%230089B3' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-      }} />
-
+      <div
+        className="absolute inset-0 opacity-[0.015]"
+        style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%230089B3' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+        }}
+      />
       {/* Orbs decorativos como en Hero */}
       <motion.div
-        animate={{ 
-          scale: [1, 1.1, 1], 
+        animate={{
+          scale: [1, 1.1, 1],
           opacity: [0.15, 0.25, 0.15],
           x: [0, 20, 0],
         }}
@@ -54,15 +79,14 @@ const AboutPreview = () => {
         className="absolute top-1/4 right-[5%] w-[400px] h-[400px] bg-primary-500/10 rounded-full blur-[100px]"
       />
       <motion.div
-        animate={{ 
-          scale: [1.1, 1, 1.1], 
+        animate={{
+          scale: [1.1, 1, 1.1],
           opacity: [0.2, 0.3, 0.2],
           x: [0, -20, 0],
         }}
         transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
         className="absolute bottom-1/4 left-[5%] w-[400px] h-[400px] bg-medical-cyan/10 rounded-full blur-[100px]"
       />
-
       <div className="container-clinical relative z-10">
         {/* Header mejorado */}
         <motion.div
@@ -82,7 +106,10 @@ const AboutPreview = () => {
           >
             <Award className="w-5 h-5 text-primary-600" strokeWidth={2.5} />
             <span className="text-sm font-bold text-primary-700 uppercase tracking-wider">
-              {t({ es: 'Liderazgo Médico Internacional', en: 'International Medical Leadership' })}
+              {t({
+                es: "Liderazgo Médico Internacional",
+                en: "International Medical Leadership",
+              })}
             </span>
           </motion.div>
 
@@ -106,8 +133,8 @@ const AboutPreview = () => {
             className="text-xl md:text-2xl text-clinical-charcoal max-w-4xl mx-auto leading-relaxed font-light"
           >
             {t({
-              es: 'Pionero en técnicas de definición corporal 4K. Certificado por ACCC. Casos documentados en 50+ países con resultados verificables.',
-              en: 'Pioneer in 4K body definition techniques. ACCC Certified. Documented cases in 50+ countries with verifiable results.',
+              es: "Pionero en técnicas de definición corporal 4K. Certificado por ACCC. Casos documentados en 50+ países con resultados verificables.",
+              en: "Pioneer in 4K body definition techniques. ACCC Certified. Documented cases in 50+ countries with verifiable results.",
             })}
           </motion.p>
         </motion.div>
@@ -124,7 +151,7 @@ const AboutPreview = () => {
           >
             {/* Decorative ring como en Hero */}
             <div className="absolute -inset-8 bg-gradient-to-br from-primary-500/20 to-medical-cyan/20 rounded-[3rem] blur-3xl group-hover:blur-[80px] transition-all duration-700" />
-            
+
             {/* Imagen con overlay */}
             <div className="relative rounded-[2.5rem] overflow-hidden shadow-[0_20px_60px_-12px_rgba(0,137,179,0.3)] ring-1 ring-primary-500/10">
               <div className="absolute inset-0 bg-gradient-to-t from-medical-navy/40 via-medical-navy/10 to-transparent z-10" />
@@ -149,13 +176,13 @@ const AboutPreview = () => {
                 >
                   {/* Top accent line */}
                   <div className="absolute top-0 left-1/2 -translate-x-1/2 w-12 h-1 bg-gradient-to-r from-transparent via-primary-500 to-transparent rounded-full" />
-                  
+
                   <div className="flex items-center justify-center mb-2">
                     <div className="w-8 h-8 bg-primary-500/10 rounded-lg flex items-center justify-center text-primary-600 group-hover/stat:scale-110 transition-transform">
                       {stat.icon}
                     </div>
                   </div>
-                  
+
                   <p className="text-2xl md:text-3xl font-black bg-gradient-to-br from-primary-600 to-medical-cyan bg-clip-text text-transparent text-center">
                     {stat.value}
                   </p>
@@ -175,23 +202,23 @@ const AboutPreview = () => {
             transition={{ duration: 0.7 }}
             className="space-y-8 order-1 lg:order-2"
           >
-            {/* Video preview premium */}
-            <div 
+            {/* Video preview premium CON THUMBNAIL */}
+            <div
               onClick={() => setIsVideoOpen(true)}
               className="relative group cursor-pointer rounded-[2rem] overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500"
             >
               <div className="aspect-video relative">
-                <video
-                  src={videoUrl}
+                {/* THUMBNAIL EN LUGAR DE VIDEO */}
+                <img
+                  src={videoThumbnail}
+                  alt="Video Preview Thumbnail"
                   className="w-full h-full object-cover"
-                  muted
-                  playsInline
                 />
-                
+
                 {/* Multi-layer overlay */}
                 <div className="absolute inset-0 bg-gradient-to-t from-medical-navy/80 via-medical-navy/30 to-transparent" />
                 <div className="absolute inset-0 bg-primary-500/0 group-hover:bg-primary-500/10 transition-colors duration-500" />
-                
+
                 {/* Play button premium como en Hero */}
                 <motion.button
                   whileHover={{ scale: 1.2 }}
@@ -205,7 +232,11 @@ const AboutPreview = () => {
                     <div className="absolute -inset-2 bg-white/30 rounded-full blur-md" />
                     {/* Main button */}
                     <div className="relative w-20 h-20 bg-white rounded-full flex items-center justify-center shadow-2xl border-4 border-white/50 transition-all">
-                      <Play className="w-8 h-8 text-primary-600 ml-1" fill="currentColor" strokeWidth={0} />
+                      <Play
+                        className="w-8 h-8 text-primary-600 ml-1"
+                        fill="currentColor"
+                        strokeWidth={0}
+                      />
                     </div>
                   </div>
                 </motion.button>
@@ -214,13 +245,12 @@ const AboutPreview = () => {
                 <div className="absolute top-4 right-4 z-10">
                   <div className="bg-white/95 backdrop-blur-sm px-4 py-2 rounded-full border border-primary-500/20 shadow-lg">
                     <span className="text-xs font-bold text-primary-700 uppercase tracking-wider">
-                      {t({ es: 'Ver Historia', en: 'Watch Story' })}
+                      {t({ es: "Ver Historia", en: "Watch Story" })}
                     </span>
                   </div>
                 </div>
               </div>
             </div>
-
             {/* Achievements cards premium */}
             <div className="grid gap-4">
               {achievements.map((achievement, index) => (
@@ -234,14 +264,12 @@ const AboutPreview = () => {
                   className="group relative bg-white/80 backdrop-blur-sm rounded-2xl p-5 border border-clinical-silver/30 hover:border-primary-500/40 shadow-lg shadow-black/5 hover:shadow-xl hover:shadow-primary-500/10 transition-all duration-300"
                 >
                   {/* Shine effect en hover */}
-                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-primary-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl" />
-                  
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-primary-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl" />{" "}
                   <div className="relative flex items-start gap-4">
                     {/* Icon container */}
                     <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-primary-500/15 to-medical-cyan/15 rounded-xl flex items-center justify-center text-primary-600 group-hover:scale-110 group-hover:from-primary-500/25 group-hover:to-medical-cyan/25 transition-all duration-300">
                       {achievement.icon}
-                    </div>
-                    
+                    </div>{" "}
                     {/* Content */}
                     <div className="flex-1 min-w-0">
                       <h4 className="font-bold text-base md:text-lg text-clinical-dark group-hover:text-primary-600 transition-colors mb-1">
@@ -250,19 +278,27 @@ const AboutPreview = () => {
                       <p className="text-sm text-clinical-slate leading-relaxed">
                         {t(achievement.description)}
                       </p>
-                    </div>
-
+                    </div>{" "}
                     {/* Arrow indicator */}
                     <div className="flex-shrink-0 text-primary-500/0 group-hover:text-primary-500/100 transition-all">
-                      <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                      <svg
+                        className="w-5 h-5"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M9 5l7 7-7 7"
+                        />
                       </svg>
                     </div>
                   </div>
                 </motion.div>
               ))}
-            </div>
-
+            </div>{" "}
             {/* CTA Button */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -280,9 +316,22 @@ const AboutPreview = () => {
                 <div className="absolute inset-0 bg-gradient-to-r from-primary-500 to-primary-600 rounded-2xl blur group-hover:blur-md transition-all" />
                 <button className="relative w-full md:w-auto bg-gradient-to-r from-primary-600 to-primary-500 text-white font-bold px-8 py-4 rounded-2xl shadow-xl shadow-primary-500/30 hover:shadow-2xl hover:shadow-primary-500/40 transition-all">
                   <span className="flex items-center justify-center gap-2">
-                    {t({ es: 'Conocer Plan Médico Internacional', en: 'Discover International Medical Plan' })}
-                    <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                    {t({
+                      es: "Conocer Plan Médico Internacional",
+                      en: "Discover International Medical Plan",
+                    })}
+                    <svg
+                      className="w-5 h-5 group-hover:translate-x-1 transition-transform"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M17 8l4 4m0 0l-4 4m4-4H3"
+                      />
                     </svg>
                   </span>
                 </button>
@@ -290,8 +339,7 @@ const AboutPreview = () => {
             </motion.div>
           </motion.div>
         </div>
-      </div>
-
+      </div>{" "}
       {/* Video Modal */}
       <AnimatePresence>
         {isVideoOpen && (
@@ -316,8 +364,7 @@ const AboutPreview = () => {
                 className="absolute -top-12 right-0 w-10 h-10 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center text-white transition-all"
               >
                 <X className="w-6 h-6" />
-              </button>
-
+              </button>{" "}
               {/* Video player */}
               <div className="relative rounded-2xl overflow-hidden shadow-2xl">
                 <video
@@ -332,7 +379,6 @@ const AboutPreview = () => {
         )}
       </AnimatePresence>
     </section>
-  )
-}
-
-export default AboutPreview
+  );
+};
+export default AboutPreview;
