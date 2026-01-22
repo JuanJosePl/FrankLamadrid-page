@@ -1,16 +1,28 @@
 // hooks/useStepFormCalculator.js
 // Custom hook para manejar el estado del formulario y cálculo de precios
+// ACTUALIZADO con sistema de fechas disponibles y scroll automático
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { PROCEDURES } from '../data/procedures'
 import { DESTINATIONS } from '../data/destinations'
 import { 
-  calculateDateMultiplier, 
+  calculateDateMultiplier,
+  getMultiplierFromAvailableDate,
   calculateHotelCost,
-  getRecommendedNights 
+  getRecommendedNights,
+  generateAvailableDates
 } from '../utils/pricing.utils'
 
 const useStepFormCalculator = () => {
+  // Estado del step actual
+  const [currentStep, setCurrentStep] = useState(1)
+  
+  // Ref para el scroll automático
+  const formContainerRef = useRef(null)
+  
+  // Fechas disponibles generadas
+  const [availableDates, setAvailableDates] = useState([])
+
   // Estado del formulario
   const [formData, setFormData] = useState({
     // Step 1: Personal Info
@@ -50,6 +62,35 @@ const useStepFormCalculator = () => {
     total: 0
   })
 
+  // Generar fechas disponibles al montar el componente
+  useEffect(() => {
+    const dates = generateAvailableDates(8)
+    setAvailableDates(dates)
+  }, [])
+
+  // Scroll automático cuando cambia el step
+  useEffect(() => {
+    const scrollOptions = {
+      top: 0,
+      behavior: 'smooth'
+    }
+
+    if (formContainerRef.current) {
+      formContainerRef.current.scrollTo(scrollOptions)
+    } else {
+      window.scrollTo(scrollOptions)
+    }
+
+    // Fallback para navegadores sin smooth scroll
+    setTimeout(() => {
+      if (formContainerRef.current) {
+        formContainerRef.current.scrollTop = 0
+      } else {
+        window.scrollTo(0, 0)
+      }
+    }, 100)
+  }, [currentStep])
+
   // Efecto para recalcular precios cuando cambian dependencias
   useEffect(() => {
     calculatePricing()
@@ -60,7 +101,8 @@ const useStepFormCalculator = () => {
     formData.destino,
     formData.ciudad,
     formData.hotelCategory,
-    formData.nights
+    formData.nights,
+    availableDates
   ])
 
   // Función principal de cálculo
@@ -88,7 +130,12 @@ const useStepFormCalculator = () => {
     const complexityAdjustment = procedure.complexity[formData.complexity] || 0
 
     // Calcular multiplicador de fecha
-    const dateMultiplier = calculateDateMultiplier(formData.fecha)
+    // Usar el multiplicador de la fecha disponible si existe
+    let dateMultiplier = 1
+    if (formData.fecha) {
+      const availableDate = availableDates.find(d => d.dateString === formData.fecha)
+      dateMultiplier = availableDate ? availableDate.multiplier : calculateDateMultiplier(formData.fecha)
+    }
 
     // Calcular multiplicador de destino
     let destinationMultiplier = 1
@@ -156,6 +203,7 @@ const useStepFormCalculator = () => {
       cirugias: '',
       confirmacionMedica: false
     })
+    setCurrentStep(1)
   }
 
   // Función para actualizar noches recomendadas según procedimiento
@@ -163,6 +211,25 @@ const useStepFormCalculator = () => {
     if (formData.procedimiento) {
       const recommended = getRecommendedNights(formData.procedimiento)
       updateField('nights', recommended)
+    }
+  }
+
+  // Navegación de steps
+  const nextStep = () => {
+    if (currentStep < 7 && validateStep(currentStep)) {
+      setCurrentStep(prev => prev + 1)
+    }
+  }
+
+  const prevStep = () => {
+    if (currentStep > 1) {
+      setCurrentStep(prev => prev - 1)
+    }
+  }
+
+  const goToStep = (step) => {
+    if (step >= 1 && step <= 7) {
+      setCurrentStep(step)
     }
   }
 
@@ -202,16 +269,36 @@ const useStepFormCalculator = () => {
     )
   }
 
+  // Función para obtener el porcentaje de completitud
+  const getCompletionPercentage = () => {
+    const totalSteps = 7
+    return Math.round((currentStep / totalSteps) * 100)
+  }
+
   return {
+    // Estado
     formData,
     pricing,
+    currentStep,
+    availableDates,
+    formContainerRef,
+    
+    // Métodos de actualización
     updateField,
     updateFields,
+    setFormData,
+    
+    // Navegación
+    nextStep,
+    prevStep,
+    goToStep,
+    
+    // Utilidades
     resetForm,
     setRecommendedNights,
     validateStep,
     isFormComplete,
-    setFormData
+    getCompletionPercentage
   }
 }
 

@@ -1,6 +1,9 @@
 // components/steps/MedicalHistoryStep.jsx
 // Step 6: Historial médico y confirmación de veracidad
 
+// en este paso cuando paso al paso 7 se va hacia arriba.
+
+
 import { motion } from 'framer-motion'
 import { Stethoscope, AlertCircle } from 'lucide-react'
 

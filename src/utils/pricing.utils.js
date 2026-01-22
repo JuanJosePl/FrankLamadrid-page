@@ -1,7 +1,56 @@
 // utils/pricing.utils.js
 // Lógica completa de cálculo de precios para procedimientos médicos
+// ACTUALIZADO para trabajar con sistema de fechas disponibles
 
-import { TrendingDown, TrendingUp, Calendar } from 'lucide-react'
+import { TrendingDown, TrendingUp, Minus } from 'lucide-react'
+
+/**
+ * Genera fechas disponibles del doctor con pricing dinámico
+ * @param {number} count - Número de fechas a generar (default: 8)
+ * @returns {Array} Array de objetos con fechas disponibles
+ */
+export const generateAvailableDates = (count = 8) => {
+  const today = new Date()
+  const dates = []
+  
+  // Distribución de fechas:
+  // 2 fechas urgentes (15-25 días) -> +15%
+  // 3 fechas estándar (35-60 días) -> precio base
+  // 3 fechas anticipadas (95-120 días) -> -10%
+  
+  const dateRanges = [
+    { minDays: 15, maxDays: 25, count: 2, multiplier: 1.15, priceImpact: '+15%', color: 'orange' },
+    { minDays: 35, maxDays: 60, count: 3, multiplier: 1.0, priceImpact: 'Estándar', color: 'blue' },
+    { minDays: 95, maxDays: 120, count: 3, multiplier: 0.90, priceImpact: '-10%', color: 'green' }
+  ]
+
+  dateRanges.forEach(range => {
+    for (let i = 0; i < range.count; i++) {
+      const daysToAdd = Math.floor(
+        Math.random() * (range.maxDays - range.minDays) + range.minDays
+      )
+      const date = new Date(today)
+      date.setDate(date.getDate() + daysToAdd)
+      
+      let icon = Minus
+      if (range.multiplier > 1) icon = TrendingUp
+      if (range.multiplier < 1) icon = TrendingDown
+      
+      dates.push({
+        date: date,
+        dateString: date.toISOString().split('T')[0],
+        daysUntil: daysToAdd,
+        multiplier: range.multiplier,
+        priceImpact: range.priceImpact,
+        icon: icon,
+        color: range.color
+      })
+    }
+  })
+
+  // Ordenar por fecha
+  return dates.sort((a, b) => a.date - b.date)
+}
 
 /**
  * Calcula el multiplicador de precio basado en la fecha de cirugía
@@ -81,7 +130,7 @@ export const getDatePriceInfo = (selectedDate, lang = 'es') => {
     return { 
       label: lang === 'es' ? 'Precio estándar (óptimo)' : 'Standard price (optimal)', 
       color: 'text-blue-600', 
-      icon: Calendar, 
+      icon: Minus, 
       percentage: 0 
     }
   }
@@ -93,6 +142,17 @@ export const getDatePriceInfo = (selectedDate, lang = 'es') => {
     icon: TrendingDown, 
     percentage: -10 
   }
+}
+
+/**
+ * Obtiene el multiplicador desde una fecha generada disponible
+ * @param {string} dateString - Fecha en formato ISO
+ * @param {Array} availableDates - Array de fechas disponibles generadas
+ * @returns {number} Multiplicador de precio
+ */
+export const getMultiplierFromAvailableDate = (dateString, availableDates) => {
+  const found = availableDates.find(d => d.dateString === dateString)
+  return found ? found.multiplier : 1
 }
 
 /**
@@ -184,12 +244,37 @@ export const getRecommendedNights = (procedureId) => {
   return recommendations[procedureId] || 5
 }
 
+/**
+ * Formatea fecha para mostrar en idioma específico
+ * @param {string} dateString - Fecha en formato ISO
+ * @param {string} lang - Idioma ('es' o 'en')
+ * @param {object} options - Opciones de formato
+ * @returns {string} Fecha formateada
+ */
+export const formatDate = (dateString, lang = 'es', options = {}) => {
+  if (!dateString) return ''
+  
+  const defaultOptions = {
+    weekday: 'long',
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+    ...options
+  }
+  
+  const locale = lang === 'es' ? 'es-ES' : 'en-US'
+  return new Date(dateString).toLocaleDateString(locale, defaultOptions)
+}
+
 export default {
+  generateAvailableDates,
   calculateDateMultiplier,
   getDatePriceInfo,
+  getMultiplierFromAvailableDate,
   calculateTotalPricing,
   calculateHotelCost,
   isValidSurgeryDate,
   formatPrice,
-  getRecommendedNights
+  getRecommendedNights,
+  formatDate
 }

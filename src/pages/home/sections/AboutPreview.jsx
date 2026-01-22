@@ -1,9 +1,11 @@
-import { Award, Users, Star, Play, CheckCircle } from 'lucide-react'
-import { motion } from 'framer-motion'
+import { useState } from 'react'
+import { Award, Users, Star, Play, CheckCircle, X } from 'lucide-react'
+import { motion, AnimatePresence } from 'framer-motion'
 import { useLanguage } from '../../../contexts/LanguageContext'
 
 const AboutPreview = () => {
   const { t } = useLanguage()
+  const [isVideoOpen, setIsVideoOpen] = useState(false)
 
   const stats = [
     { value: '18K+', label: { es: 'Cirugías', en: 'Surgeries' }, icon: <CheckCircle /> },
@@ -28,6 +30,8 @@ const AboutPreview = () => {
       description: { es: 'Pionero y creador de la técnica patentada', en: 'Pioneer and creator of patented technique' },
     },
   ]
+
+  const videoUrl = 'https://res.cloudinary.com/disqdfjy9/video/upload/v1769050268/Lipoescultura_4K_t%C3%A9cnica_Dr_Frank_Lamadrid_t0nnzw.mp4'
 
   return (
     <section id="sobre-mi" className="relative min-h-screen flex items-center py-24 md:py-32 lg:py-40 overflow-hidden">
@@ -172,12 +176,16 @@ const AboutPreview = () => {
             className="space-y-8 order-1 lg:order-2"
           >
             {/* Video preview premium */}
-            <div className="relative group cursor-pointer rounded-[2rem] overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500">
+            <div 
+              onClick={() => setIsVideoOpen(true)}
+              className="relative group cursor-pointer rounded-[2rem] overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500"
+            >
               <div className="aspect-video relative">
-                <img
-                  src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?w=800&h=450&fit=crop&q=80"
-                  alt="Video Preview"
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                <video
+                  src={videoUrl}
+                  className="w-full h-full object-cover"
+                  muted
+                  playsInline
                 />
                 
                 {/* Multi-layer overlay */}
@@ -283,6 +291,46 @@ const AboutPreview = () => {
           </motion.div>
         </div>
       </div>
+
+      {/* Video Modal */}
+      <AnimatePresence>
+        {isVideoOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/90 backdrop-blur-sm"
+            onClick={() => setIsVideoOpen(false)}
+          >
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              transition={{ type: "spring", damping: 25 }}
+              className="relative w-full max-w-5xl"
+              onClick={(e) => e.stopPropagation()}
+            >
+              {/* Close button */}
+              <button
+                onClick={() => setIsVideoOpen(false)}
+                className="absolute -top-12 right-0 w-10 h-10 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center text-white transition-all"
+              >
+                <X className="w-6 h-6" />
+              </button>
+
+              {/* Video player */}
+              <div className="relative rounded-2xl overflow-hidden shadow-2xl">
+                <video
+                  src={videoUrl}
+                  controls
+                  autoPlay
+                  className="w-full aspect-video bg-black"
+                />
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   )
 }

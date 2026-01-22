@@ -1,6 +1,8 @@
 // components/steps/DestinationStep.jsx
 // Step 4: Selección de destino médico (país y ciudad)
 
+// en este paso cuando paso al paso 5 se va hacia arriba.
+
 import { motion } from 'framer-motion'
 import { MapPin } from 'lucide-react'
 import { DESTINATIONS } from '../../../../data/destinations'

@@ -83,7 +83,7 @@ const AccommodationStep = ({ formData, updateField, pricing }) => {
               <Star key={i} className="w-5 h-5 fill-yellow-400 text-yellow-400" />
             ))}
           </div>
-
+      
           {/* Hotel Name */}
           <h4 className="text-lg font-bold text-slate-900 mb-2">
             {hotels.fourStar.name}
